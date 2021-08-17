@@ -1,4 +1,33 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+
+  .addCard {
+    display: flex;
+    justify-content:center;
+    text-decoration: none;
+  }
+  
+  .card {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    margin: 20px;
+    flex-direction: row;
+
+    .image {
+      width: 90%;
+      height: 25%;
+      margin: 0 20px;
+    }
+
+    .price {
+      font-style: italic;
+    }
+
+    .location {
+      font-weight: 600;
+    }
+
+  }
+}

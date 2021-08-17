@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 
@@ -19,7 +20,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import { green } from '@material-ui/core/colors';
+import { red, green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Component = ({ className, children }) => {
   const classes = useStyles();
-  const [login, setLogin] = React.useState();
+  const [login, setLogin] = useState(false);
   const handleChange = (event) => {
     setLogin(event.target.checked);
   };
@@ -51,11 +52,11 @@ const Component = ({ className, children }) => {
               aria-label='login switch'
             />
           }
-          label={login ? 'Logout' : 'Login'}
+          label={login ? 'if Login' : 'if Logout'}
         />
       </FormGroup>
       <AppBar position='static'>
-        <Toolbar>
+        <Toolbar className={styles.toolbar}>
           <IconButton
             edge='start'
             className={classes.menuButton}
@@ -75,10 +76,11 @@ const Component = ({ className, children }) => {
                 aria-label='account of current user'
                 aria-controls='menu-appbar'
                 aria-haspopup='true'
-                color='inherit'
+                style={{ color: green[500] }}
                 href='https://google.com'
               >
                 <AccountCircle />
+                  Login by Auth0
               </IconButton>
             </div>
           )}
@@ -88,10 +90,20 @@ const Component = ({ className, children }) => {
                 aria-label='account of current user'
                 aria-controls='menu-appbar'
                 aria-haspopup='true'
-                style={{ color: green[500] }}
+              >
+                <Link to={'/'} className={styles.link}>
+                  My adverts
+                </Link>
+              </IconButton>
+              <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                style={{ color: red[500] }}
                 href='/'
               >
               <AccountCircle />
+                Logout
               </IconButton>
             </div>
           )}
