@@ -1,12 +1,6 @@
 @import '../../../styles/settings.scss';
 
 .root {
-
-  .addCard {
-    display: flex;
-    justify-content:center;
-    text-decoration: none;
-  }
   
   .card {
     display: flex;
@@ -28,6 +22,5 @@
     .location {
       font-weight: 600;
     }
-
   }
 }

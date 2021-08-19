@@ -15,16 +15,11 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Fab from '@material-ui/core/Fab';
 
@@ -54,14 +49,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Component = ({ className, postsAll }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState();
 
   const handleChange = (event) => {
     setLogin(!login);
-  };
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
   };
 
   return (
@@ -72,8 +63,7 @@ const Component = ({ className, postsAll }) => {
 
       {login && (
         <div>
-
-          <Link className={styles.addCard} to={'/post/add'}>
+          <Link className={styles.button} to={'/post/add'}>
             <Fab
               size='small'
               color='primary'
@@ -83,7 +73,7 @@ const Component = ({ className, postsAll }) => {
               Add new post
             </Fab>
           </Link>
-
+          
           <div className={styles.card}>
             {postsAll.map((post) => (
               <Card key={post.id} className={styles.cardItem}>
@@ -126,41 +116,17 @@ const Component = ({ className, postsAll }) => {
                       </Typography>
                     </div>
                   </CardContent>
-                </CardActionArea>
-                <CardActions disableSpacing>
-                  <IconButton aria-label='add to favorites'>
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label='share'>
-                    <ShareIcon />
-                  </IconButton>
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label='show more'
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={expanded} timeout='auto' unmountOnExit>
-                  <CardContent>
-                    <Typography paragraph>{post.content}</Typography>
-                  </CardContent>
-                </Collapse>
+                </CardActionArea>            
               </Card>
             ))}
           </div>
-
         </div>
       )}
       {!login && (
-        <div>
-          <h3>Login First</h3>
+        <div className={styles.card}>
+          -----Nie przechodzi testu-----
         </div>
-      )}
+      )}      
     </div>
   );
 };
