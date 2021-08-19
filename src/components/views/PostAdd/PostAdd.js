@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-//import { connect } from 'react-redux';
-//import { addPost } from '../../../redux/postsRedux';
+import { connect } from 'react-redux';
+import { getAll, addPost } from '../../../redux/postsRedux';
 
 import styles from './PostAdd.module.scss';
 
@@ -40,7 +40,7 @@ const Component = ({className, addPost}) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <h2>Post Edit</h2>
+      <h2>Post Add</h2>
       <form className={styles.changesForm} action="/contact/send-message" method="POST" enctype="multipart/form-data" onSubmit={submitForm}>
         <label className={styles.formInput}>
           Title: <input type="text" name="title" value={post.title} onChange={handleChange}></input>
@@ -74,18 +74,18 @@ Component.propTypes = {
   className: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  postsAll: getAll(state),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  addPost: post => dispatch(addPost(post)),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as PostAdd,
-  // Container as PostAdd,
+  // Component as PostAdd,
+  Container as PostAdd,
   Component as PostAddComponent,
 };

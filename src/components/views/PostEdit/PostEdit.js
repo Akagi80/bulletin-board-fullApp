@@ -1,42 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
-import styles from './PostEdit.module.scss';
-
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>PostEdit</h2>
-    {children}
-  </div>
-);
-
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as PostEdit,
-  // Container as PostEdit,
-  Component as PostEditComponent,
-};
-
-/*
 import React,  { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -108,8 +69,22 @@ const Component = ({className, postOne, editPost}) => {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
+  postsOne: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      content: PropTypes.string,
+      publicationDate: PropTypes.string,
+      updateDate: PropTypes.string,
+      email: PropTypes.string,
+      status: PropTypes.string,
+      image: PropTypes.string,
+      price: PropTypes.string,
+      phone: PropTypes.string,
+      location: PropTypes.string,
+    })
+  ),
 };
 
 const mapStateToProps = (state, props) => ({
@@ -123,8 +98,7 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
+  // Component as PostEdit,
   Container as PostEdit,
-  // Container as PostEdit,
   Component as PostEditComponent,
 };
-*/

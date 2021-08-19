@@ -16,12 +16,11 @@ const Component = ({className, postOne}) => {
     setLogin(!login);
   };
 
-  return (    
+  return (
     <div className={clsx(className, styles.root)}>
       <Link to='#' onClick={handleChange}>
         {login ? 'if Author or Admin:' : 'if no Author or Admin:'}
       </Link>
-      {login && (
         <div>
           {postOne.map(post => (
             <div key={post.id}>
@@ -29,13 +28,14 @@ const Component = ({className, postOne}) => {
               <div>
                 <h3 className={styles.title}>{post.title}</h3>
                 <p className={styles.info}>Location: {post.location}</p>
-                <p className={styles.info}>Added: {post.publicationDate}</p>                
+                <p className={styles.info}>Added: {post.publicationDate}</p>
                 <p className={styles.about}>{post.content}</p>
                 <p className={styles.info}>Price: {post.price}$</p>
                 <p className={styles.info}>Email: {post.email} </p>
                 <p className={styles.info}>Phone number: {post.phone} </p>
                 <p className={styles.info}>Edited: {post.updateDate}</p>
-                <p className={styles.info}>Status: {post.status}</p>     
+                <p className={styles.info}>Status: {post.status}</p>
+                {login && (
                 <Link className={styles.button} to={`/post/${post.id}/edit`}>
                   <Fab
                     size='small'
@@ -46,16 +46,11 @@ const Component = ({className, postOne}) => {
                     Edit Post
                   </Fab>
                 </Link>
+                )}
               </div>
-            </div>  
+            </div>
           ))}
         </div>
-      )}
-      {!login && (
-        <div className={styles.card}>
-          -----Nie przechodzi testu-----
-        </div>
-      )}
     </div>
   )
 };

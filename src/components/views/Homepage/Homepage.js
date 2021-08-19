@@ -73,60 +73,55 @@ const Component = ({ className, postsAll }) => {
               Add new post
             </Fab>
           </Link>
-          
-          <div className={styles.card}>
-            {postsAll.map((post) => (
-              <Card key={post.id} className={styles.cardItem}>
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label='recipe' className={classes.avatar}>
-                      R
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label='settings'>
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={post.title}
-                  subheader={post.publicationDate}
-                />
-
-                <CardActionArea>
-                  <CardMedia
-                    className={styles.image}
-                    component='img'
-                    image={post.image}
-                    title={post.title}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      component='p'
-                    >
-                      {post.content}
-                    </Typography>
-                    <div>
-                      <Typography className={styles.price} component='p' variant='subtitle2'>
-                        Price: {post.price}$
-                      </Typography>
-                      <Typography className={styles.location} component='p' variant='subtitle2'>
-                        Location: {post.location}
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </CardActionArea>            
-              </Card>
-            ))}
-          </div>
         </div>
       )}
-      {!login && (
-        <div className={styles.card}>
-          -----Nie przechodzi testu-----
-        </div>
-      )}      
+
+      <div className={styles.card}>
+        {postsAll.map((post) => (
+          <Card key={post.id} className={styles.cardItem}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label='recipe' className={classes.avatar}>
+                  R
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label='settings'>
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={post.title}
+              subheader={post.publicationDate}
+            />
+
+            <CardActionArea>
+              <CardMedia
+                className={styles.image}
+                component='img'
+                image={post.image}
+                title={post.title}
+              />
+              <CardContent>
+                <Typography
+                  variant='body2'
+                  color='textSecondary'
+                  component='p'
+                >
+                  {post.content}
+                </Typography>
+                <div>
+                <Typography className={styles.price} component='p' variant='subtitle2'>
+                    Price: {post.price}$
+                  </Typography>
+                  <Typography className={styles.location} component='p' variant='subtitle2'>
+                    Location: {post.location}
+                  </Typography>
+                </div>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
