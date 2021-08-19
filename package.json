@@ -20,7 +20,8 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "yarn test-related --"
+      "yarn test-related --",
+      "eslint"
     ]
   },
   "browserslist": {
