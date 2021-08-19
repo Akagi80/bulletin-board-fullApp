@@ -1,4 +1,30 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  width: 50%;
+  margin: auto;
+  text-align: center;    
+    
+  .changesForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: darkblue 2px solid;
+    border-radius: 5px;
+    padding: 20px 0;
+    background-color: lightgrey;
+    
+    .formInput {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 70%;
+      margin: 20px 0;
+    
+      input, textarea {
+        width: 80%;
+      }
+    }
+  }
+}

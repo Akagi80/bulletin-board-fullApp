@@ -109,7 +109,7 @@ const Component = ({ className, postsAll }) => {
                     </Typography>
                     <div>
                       <Typography className={styles.price} component='p' variant='subtitle2'>
-                        Price: {post.price}
+                        Price: {post.price}$
                       </Typography>
                       <Typography className={styles.location} component='p' variant='subtitle2'>
                         Location: {post.location}

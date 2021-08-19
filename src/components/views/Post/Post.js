@@ -6,9 +6,9 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getOne } from '../../../redux/postsRedux';
-import Fab from '@material-ui/core/Fab';
 
 import styles from './Post.module.scss';
+import Fab from '@material-ui/core/Fab';
 
 const Component = ({className, postOne}) => {
   const [login, setLogin] = useState(false);
@@ -28,13 +28,13 @@ const Component = ({className, postOne}) => {
               <img className={styles.image} src={post.image} alt='' />
               <div>
                 <h3 className={styles.title}>{post.title}</h3>
-                <p className={styles.info}>Price: {post.price}</p>
-                <p className={styles.about}>{post.content}</p>
                 <p className={styles.info}>Location: {post.location}</p>
-                <p className={styles.info}>Added: {post.publicationDate}</p>
+                <p className={styles.info}>Added: {post.publicationDate}</p>                
+                <p className={styles.about}>{post.content}</p>
+                <p className={styles.info}>Price: {post.price}$</p>
+                <p className={styles.info}>Email: {post.email} </p>
+                <p className={styles.info}>Phone number: {post.phone} </p>
                 <p className={styles.info}>Edited: {post.updateDate}</p>
-                <p className={styles.info}>email: {post.email} </p>
-                <p className={styles.info}>phone number: {post.phone} </p>
                 <p className={styles.info}>Status: {post.status}</p>     
                 <Link className={styles.button} to={`/post/${post.id}/edit`}>
                   <Fab
