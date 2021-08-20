@@ -1,4 +1,12 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  display: flex;
+  flex-direction: column;
+  
+  .title {
+    margin: 50px;
+    text-align: center;
+    font-size: 40px;
+  }
+}

@@ -1,6 +1,6 @@
 import React,  { useState } from 'react';
 import PropTypes from 'prop-types';
-//import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import clsx from 'clsx';
 
@@ -10,10 +10,17 @@ import { getAll, addPost } from '../../../redux/postsRedux';
 import styles from './PostAdd.module.scss';
 
 const Component = ({className, addPost}) => {
+  const [login, setLogin] = useState(false);
   const [post, setPost] = useState('');
+
   const handleChange = (event) => {
-    setPost({ ...post, [event.target.name]: event.target.value })
+    setPost({ ...post, [event.target.name]: event.target.value });
   }
+
+  const handleChange2 = (event) => {
+    setLogin(!login)
+  }
+  
   const submitForm = (event) => {
     event.preventDefault();
     if(post.title.length > 1 && post.content.length > 1 && post.email){
@@ -40,31 +47,42 @@ const Component = ({className, addPost}) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <h2>Post Add</h2>
-      <form className={styles.changesForm} action="/contact/send-message" method="POST" enctype="multipart/form-data" onSubmit={submitForm}>
-        <label className={styles.formInput}>
-          Title: <input type="text" name="title" value={post.title} onChange={handleChange}></input>
-        </label>
-        <label className={styles.formInput}>
-          Location: <input type="text" name="location" value={post.location} onChange={handleChange}></input>
-        </label>
-        <label className={styles.formInput}>
-          Description: <textarea type="text" name="content" value={post.content} onChange={handleChange}></textarea>
-        </label>
-        <label className={styles.formInput}>
-          Price: <input type="text" name="price" value={post.price} onChange={handleChange}></input>
-        </label>
-        <label className={styles.formInput}>
-          Email: <input type="text" name="email" value={post.email} onChange={handleChange}></input>
-        </label>
-        <label className={styles.formInput}>
-          Phone number: <input type="text" name="phone" value={post.phone} onChange={handleChange}></input>
-        </label>
-        <label className={styles.formInput}>
-          Image: <input type="file" name="image" accept=".png, .gif, .jpg" onChange={handleChange}></input>
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+      <Link className={styles.switchState} to='#' onClick={handleChange2}>
+        {login ? 'if Login:' : 'if not Login:'}
+      </Link>
+
+      {login && (
+        <div>
+          <h2>Post Add</h2>
+          <form className={styles.changesForm} action="/contact/send-message" method="POST" enctype="multipart/form-data" onSubmit={submitForm}>
+            <label className={styles.formInput}>
+              Title: <input type="text" name="title" value={post.title} onChange={handleChange}></input>
+            </label>
+            <label className={styles.formInput}>
+              Location: <input type="text" name="location" value={post.location} onChange={handleChange}></input>
+            </label>
+            <label className={styles.formInput}>
+              Description: <textarea type="text" name="content" value={post.content} onChange={handleChange}></textarea>
+            </label>
+            <label className={styles.formInput}>
+              Price: <input type="text" name="price" value={post.price} onChange={handleChange}></input>
+            </label>
+            <label className={styles.formInput}>
+              Email: <input type="text" name="email" value={post.email} onChange={handleChange}></input>
+            </label>
+            <label className={styles.formInput}>
+              Phone number: <input type="text" name="phone" value={post.phone} onChange={handleChange}></input>
+            </label>
+            <label className={styles.formInput}>
+              Image: <input type="file" name="image" accept=".png, .gif, .jpg" onChange={handleChange}></input>
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      )}
+      {!login && (          
+        <h2>You have to login first</h2>
+      )}
     </div>
   )
 };

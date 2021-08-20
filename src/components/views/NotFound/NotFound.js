@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 import clsx from 'clsx';
 
@@ -7,16 +8,27 @@ import clsx from 'clsx';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './NotFound.module.scss';
+import Fab from '@material-ui/core/Fab';
 
-const Component = ({className, children}) => (
+const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
-    {children}
+    <h2 className={styles.title}>Page Not Found</h2>
+
+    <Link className={styles.button} to={'/'}>
+      <Fab
+        size='small'
+        color='primary'
+        aria-label='add'
+        variant='extended'
+      >
+        Back to Homepage
+      </Fab>
+    </Link>
+    
   </div>
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 

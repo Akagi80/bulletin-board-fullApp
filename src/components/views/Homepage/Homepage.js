@@ -57,24 +57,9 @@ const Component = ({ className, postsAll }) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <Link to='#' onClick={handleChange}>
+      <Link className={styles.switchState} to='#' onClick={handleChange}>
         {login ? 'if Login:' : 'if Logout:'}
       </Link>
-
-      {login && (
-        <div>
-          <Link className={styles.button} to={'/post/add'}>
-            <Fab
-              size='small'
-              color='primary'
-              aria-label='add'
-              variant='extended'
-            >
-              Add new post
-            </Fab>
-          </Link>
-        </div>
-      )}
 
       <div className={styles.card}>
         {postsAll.map((post) => (
@@ -107,7 +92,6 @@ const Component = ({ className, postsAll }) => {
                   color='textSecondary'
                   component='p'
                 >
-                  {post.content}
                 </Typography>
                 <div>
                 <Typography className={styles.price} component='p' variant='subtitle2'>
@@ -117,11 +101,33 @@ const Component = ({ className, postsAll }) => {
                     Location: {post.location}
                   </Typography>
                 </div>
+                <Link className={styles.button} to={`/post/${post.id}`}>
+                  <Fab
+                    size='small'
+                    color='primary'
+                    aria-label='add'
+                    variant='extended'
+                  >
+                    See more
+                  </Fab>
+                </Link>
               </CardContent>
             </CardActionArea>
           </Card>
         ))}
       </div>
+      {login && (          
+        <Link className={styles.button} to={'/post/add'}>
+          <Fab
+            size='small'
+            color='primary'
+            aria-label='add'
+            variant='extended'
+          >
+            Add new post
+          </Fab>
+        </Link>
+      )}
     </div>
   );
 };

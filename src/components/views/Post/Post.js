@@ -18,10 +18,10 @@ const Component = ({className, postOne}) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <Link to='#' onClick={handleChange}>
+      <Link className={styles.switchState} to='#' onClick={handleChange}>
         {login ? 'if Author or Admin:' : 'if no Author or Admin:'}
       </Link>
-        <div>
+        <div className={styles.postCard}>
           {postOne.map(post => (
             <div key={post.id}>
               <img className={styles.image} src={post.image} alt='' />
