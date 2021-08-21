@@ -1,6 +1,7 @@
 import React,  { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
 
@@ -20,7 +21,7 @@ const Component = ({className, addPost}) => {
   const handleChange2 = (event) => {
     setLogin(!login)
   }
-  
+
   const submitForm = (event) => {
     event.preventDefault();
     if(post.title.length > 1 && post.content.length > 1 && post.email){
@@ -80,8 +81,8 @@ const Component = ({className, addPost}) => {
           </form>
         </div>
       )}
-      {!login && (          
-        <h2>You have to login first</h2>
+      {!login && (
+        <NotFound />
       )}
     </div>
   )

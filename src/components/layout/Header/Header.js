@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+// mport { isLogged, logIn, logOut } from '../../../redux/postsRedux';
 
 import styles from './Header.module.scss';
 

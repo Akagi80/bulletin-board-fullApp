@@ -1,6 +1,7 @@
 import React,  { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
 
@@ -19,7 +20,7 @@ const Component = ({className, postOne, editPost}) => {
   const handleChange2 = (event) => {
     setLogin(!login)
   }
-  
+
   const submitForm = (event) => {
     event.preventDefault();
     if(post.title.length > 1 && post.content.length > 1 && post.email){
@@ -79,8 +80,8 @@ const Component = ({className, postOne, editPost}) => {
           </form>
       </div>
       )}
-      {!login && (          
-        <h2>Access Denied!</h2>
+      {!login && (
+        <NotFound />
       )}
     </div>
   )
