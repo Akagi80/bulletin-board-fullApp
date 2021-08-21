@@ -116,11 +116,11 @@ const Component = ({ className, postsAll }) => {
           </Card>
         ))}
       </div>
-      {login && (          
+      {login && (
         <Link className={styles.button} to={'/post/add'}>
           <Fab
             size='small'
-            color='primary'
+            color='          primary'
             aria-label='add'
             variant='extended'
           >
