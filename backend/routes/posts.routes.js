@@ -29,4 +29,18 @@ router.get('/posts/:id', async (req, res) => {
   }
 });
 
+/*
+router.post('/posts/add', async (req, res) => {
+  try {
+    const result = await Post
+      .add(req.params.id);
+    if(!result) res.status(404).json({ post: 'Not found' });
+    else res.json(result);
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+});
+*/
+
 module.exports = router;

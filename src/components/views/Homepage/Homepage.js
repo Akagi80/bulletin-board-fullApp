@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAll, fetchPublished } from '../../../redux/postsRedux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Homepage.module.scss';
@@ -17,10 +17,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Fab from '@material-ui/core/Fab';
 
 // Widok oparty na materiam-ui Components / Surfaces / Card
@@ -47,7 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Component = ({ className, postsAll }) => {
+const Component = ({ className, postsAll, fetchPublishedPosts }) => {
+  React.useEffect(() => {
+    fetchPublishedPosts();
+  }, []);
+
   const classes = useStyles();
   const [login, setLogin] = useState();
 
@@ -63,28 +65,22 @@ const Component = ({ className, postsAll }) => {
 
       <div className={styles.card}>
         {postsAll.map((post) => (
-          <Card key={post.id} className={styles.cardItem}>
+          <Card key={post.id}>
             <CardHeader
               avatar={
                 <Avatar aria-label='recipe' className={classes.avatar}>
                   R
                 </Avatar>
               }
-              action={
-                <IconButton aria-label='settings'>
-                  <MoreVertIcon />
-                </IconButton>
-              }
               title={post.title}
-              subheader={post.publicationDate}
             />
 
-            <CardActionArea>
+            <CardActionArea
+              href={`/post/${post._id}`}>
               <CardMedia
                 className={styles.image}
                 component='img'
-                image={post.image}
-                title={post.title}
+                image={post.photo}
               />
               <CardContent>
                 <Typography
@@ -94,23 +90,16 @@ const Component = ({ className, postsAll }) => {
                 >
                 </Typography>
                 <div>
-                <Typography className={styles.price} component='p' variant='subtitle2'>
-                    Price: {post.price}$
+                <Typography className={styles.author} component='p' variant='subtitle2'>
+                    Author: {post.author}
                   </Typography>
-                  <Typography className={styles.location} component='p' variant='subtitle2'>
-                    Location: {post.location}
+                  <Typography className={styles.created} component='p' variant='subtitle2'>
+                    Created: {post.created}
+                  </Typography>
+                  <Typography className={styles.click} component='p' variant='subtitle2'>
+                    Click on card to see more!
                   </Typography>
                 </div>
-                <Link className={styles.button} to={`/post/${post.id}`}>
-                  <Fab
-                    size='small'
-                    color='primary'
-                    aria-label='add'
-                    variant='extended'
-                  >
-                    See more
-                  </Fab>
-                </Link>
               </CardContent>
             </CardActionArea>
           </Card>
@@ -120,7 +109,7 @@ const Component = ({ className, postsAll }) => {
         <Link className={styles.button} to={'/post/add'}>
           <Fab
             size='small'
-            color='          primary'
+            color='primary'
             aria-label='add'
             variant='extended'
           >
@@ -134,6 +123,7 @@ const Component = ({ className, postsAll }) => {
 
 Component.propTypes = {
   className: PropTypes.string,
+  fetchPublishedPosts: PropTypes.any,
   postsAll: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -155,11 +145,11 @@ const mapStateToProps = state => ({
   postsAll: getAll(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Homepage,
