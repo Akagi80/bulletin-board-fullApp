@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Post = require('../models/post.model');
 
+// Get all posts
 router.get('/posts', async (req, res) => {
   try {
     const result = await Post
@@ -17,6 +18,7 @@ router.get('/posts', async (req, res) => {
   }
 });
 
+// Get post by id
 router.get('/posts/:id', async (req, res) => {
   try {
     const result = await Post
@@ -29,18 +31,41 @@ router.get('/posts/:id', async (req, res) => {
   }
 });
 
-/*
+
+// Add new post
 router.post('/posts/add', async (req, res) => {
   try {
-    const result = await Post
-      .add(req.params.id);
-    if(!result) res.status(404).json({ post: 'Not found' });
-    else res.json(result);
-  }
-  catch(err) {
-    res.status(500).json(err);
+    const {
+      author,
+      created,
+      updated,
+      status,
+      title,
+      text,
+      photo,
+      price,
+      phone,
+      location,
+    } = req.body;
+    const newPost = new Post({
+      author: author,
+      created: created,
+      updated: updated,
+      status: status,
+      title: title,
+      text: text,
+      photo: photo,
+      price: price,
+      phone: phone,
+      location: location,
+    });
+
+    await newPost.save();
+    res.json({ message: 'OK' });;
+  } catch (err) {
+    res.status(500).json(`This error ${err}`);
   }
 });
-*/
+
 
 module.exports = router;

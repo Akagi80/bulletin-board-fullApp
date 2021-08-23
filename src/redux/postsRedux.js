@@ -8,6 +8,7 @@ export const getAll = ({posts}) => posts.data;
 export const getOne = ({posts}, id) => posts.data.filter(post => post.id == id);
 export const getOnePost = ({posts}) => posts.onePost;
 // export const isLogged = logged => logged;
+
 /* action name creator */
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
@@ -69,7 +70,20 @@ export const fetchPostById = (id) => {
   };
 };
 
+export const fetchAddPost = (data) => {
+  return (dispatch, getState,) => {
+    dispatch(fetchStarted());
 
+    Axios
+      .post(`http://localhost:8000/api/posts/add`, data)
+      .then(res => {
+        dispatch(addPost(data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = initialState, action = {}) => {

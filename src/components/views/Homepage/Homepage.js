@@ -65,7 +65,7 @@ const Component = ({ className, postsAll, fetchPublishedPosts }) => {
 
       <div className={styles.card}>
         {postsAll.map((post) => (
-          <Card key={post.id}>
+          <Card key={post.id} className={styles.card__item}>
             <CardHeader
               avatar={
                 <Avatar aria-label='recipe' className={classes.avatar}>
