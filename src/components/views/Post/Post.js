@@ -1,16 +1,21 @@
 import React,  { useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getOne } from '../../../redux/postsRedux';
+import { getOnePost, fetchPostById } from '../../../redux/postsRedux';
 
 import styles from './Post.module.scss';
 import Fab from '@material-ui/core/Fab';
 
-const Component = ({className, postOne}) => {
+const Component = ({className, postOne, fetchPostById}) => {
+  useEffect(() => {
+    fetchPostById();
+  }, []);
+
   const [login, setLogin] = useState(false);
   const handleChange = (event) => {
     setLogin(!login);
@@ -21,22 +26,21 @@ const Component = ({className, postOne}) => {
       <Link className={styles.switchState} to='#' onClick={handleChange}>
         {login ? 'if Author or Admin:' : 'if no Author or Admin:'}
       </Link>
-        <div className={styles.postCard}>
-          {postOne.map(post => (
-            <div key={post.id}>
-              <img className={styles.image} src={post.image} alt='' />
+        <div className={styles.postCard} key={postOne.id}>          
+            <div>
+              <img className={styles.image} src={postOne.image} alt='' />
               <div>
-                <h3 className={styles.title}>{post.title}</h3>
-                <p className={styles.info}>Location: {post.location}</p>
-                <p className={styles.info}>Added: {post.publicationDate}</p>
-                <p className={styles.about}>{post.content}</p>
-                <p className={styles.info}>Price: {post.price}$</p>
-                <p className={styles.info}>Email: {post.email} </p>
-                <p className={styles.info}>Phone number: {post.phone} </p>
-                <p className={styles.info}>Edited: {post.updateDate}</p>
-                <p className={styles.info}>Status: {post.status}</p>
+                <h3 className={styles.title}>{postOne.title}</h3>
+                <p className={styles.info}>Location: {postOne.location}</p>
+                <p className={styles.info}>Added: {postOne.publicationDate}</p>
+                <p className={styles.about}>{postOne.content}</p>
+                <p className={styles.info}>Price: {postOne.price}$</p>
+                <p className={styles.info}>Email: {postOne.email} </p>
+                <p className={styles.info}>Phone number: {postOne.phone} </p>
+                <p className={styles.info}>Edited: {postOne.updateDate}</p>
+                <p className={styles.info}>Status: {postOne.status}</p>
                 {login && (
-                <Link className={styles.button} to={`/post/${post.id}/edit`}>
+                <Link className={styles.button} to={`/post/${postOne.id}/edit`}>
                   <Fab
                     size='small'
                     color='primary'
@@ -49,40 +53,30 @@ const Component = ({className, postOne}) => {
                 )}
               </div>
             </div>
-          ))}
+          
         </div>
     </div>
   )
 };
 
+
 Component.propTypes = {
   className: PropTypes.string,
-  postsOne: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      content: PropTypes.string,
-      publicationDate: PropTypes.string,
-      updateDate: PropTypes.string,
-      email: PropTypes.string,
-      status: PropTypes.string,
-      image: PropTypes.string,
-      price: PropTypes.string,
-      phone: PropTypes.string,
-      location: PropTypes.string,
-    })
-  ),
+  fetchPostById: PropTypes.func,
+  match: PropTypes.object,
+  params: PropTypes.object,
+  postOne: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 const mapStateToProps = (state, props) => ({
-  postOne: getOne(state, props.match.params.id),
+  postOne: getOnePost(state, props.match.params.id),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchPostById: () => dispatch(fetchPostById(props.match.params.id)),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Post,
