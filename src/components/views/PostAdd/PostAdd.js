@@ -80,7 +80,11 @@ const Component = ({className, addPost, fetchAddPost}) => {
               Image: <input type="file" name="image" accept=".png, .gif, .jpg" onChange={handleChange}></input>
             </label>
             <label className={styles.formInput}>
-              Status: <input type="text" name="status" value={post.status} onChange={handleChange}></input>
+              Status: 
+              <input type="radio" id="new" name="status" value="New" onChange={handleChange}></input>
+              <label for="new">new</label>
+              <input type="radio" id="published" name="status" value="Published" onChange={handleChange}></input>
+              <label for="published">published</label>
             </label>
             <button type="submit">Submit</button>
           </form>
