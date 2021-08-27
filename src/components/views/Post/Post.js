@@ -20,41 +20,45 @@ const Component = ({className, postOne, fetchPostById}) => {
   const handleChange = (event) => {
     setLogin(!login);
   };
+  console.log(postOne);
+
+  if (!postOne) {
+    return <div></div>
+  }
 
   return (
     <div className={clsx(className, styles.root)}>
       <Link className={styles.switchState} to='#' onClick={handleChange}>
         {login ? 'if Author or Admin:' : 'if no Author or Admin:'}
       </Link>
-        <div className={styles.postCard} key={postOne.id}>          
-            <div>
-              <img className={styles.image} src={postOne.image} alt='' />
-              <div>
-                <h3 className={styles.title}>{postOne.title}</h3>
-                <p className={styles.info}>Location: {postOne.location}</p>
-                <p className={styles.info}>Added: {postOne.publicationDate}</p>
-                <p className={styles.about}>{postOne.content}</p>
-                <p className={styles.info}>Price: {postOne.price}$</p>
-                <p className={styles.info}>Email: {postOne.email} </p>
-                <p className={styles.info}>Phone number: {postOne.phone} </p>
-                <p className={styles.info}>Edited: {postOne.updateDate}</p>
-                <p className={styles.info}>Status: {postOne.status}</p>
-                {login && (
-                <Link className={styles.button} to={`/post/${postOne.id}/edit`}>
-                  <Fab
-                    size='small'
-                    color='primary'
-                    aria-label='add'
-                    variant='extended'
-                  >
-                    Edit Post
-                  </Fab>
-                </Link>
-                )}
-              </div>
-            </div>
-          
+      <div className={styles.postCard} key={postOne.id}>
+        <div>
+          <img className={styles.image} src={postOne.photo} alt='' />
+          <div>
+            <h3 className={styles.title}>{postOne.title}</h3>
+            <p className={styles.info}>Location: {postOne.location}</p>
+            <p className={styles.info}>Added: {postOne.created}</p>
+            <p className={styles.about}>{postOne.content}</p>
+            <p className={styles.info}>Price: {postOne.price}$</p>
+            <p className={styles.info}>Email: {postOne.author} </p>
+            <p className={styles.info}>Phone number: {postOne.phone} </p>
+            <p className={styles.info}>Edited: {postOne.updateDate}</p>
+            <p className={styles.info}>Status: {postOne.status}</p>
+            {login && (
+            <Link className={styles.button} to={`/post/${postOne.id}/edit`}>
+                <Fab
+                  size='small'
+                  color='primary'
+                  aria-label='add'
+                  variant='extended'
+                >
+                  Edit Post
+                </Fab>
+              </Link>
+            )}
+          </div>
         </div>
+      </div>
     </div>
   )
 };

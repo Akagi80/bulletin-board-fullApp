@@ -71,13 +71,15 @@ export const fetchPostById = (id) => {
 };
 
 export const fetchAddPost = (data) => {
+  const x = {...data, author: data.email};
+
   return (dispatch, getState,) => {
     dispatch(fetchStarted());
 
     Axios
-      .post(`http://localhost:8000/api/posts/add`, data)
+      .post(`http://localhost:8000/api/posts/add`, x)
       .then(res => {
-        dispatch(addPost(data));
+        dispatch(addPost(x));
       })
       .catch(err => {
         dispatch(fetchError(err.message || true));

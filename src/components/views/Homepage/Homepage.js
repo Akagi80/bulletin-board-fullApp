@@ -127,16 +127,12 @@ Component.propTypes = {
   postsAll: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
+      _id: PropTypes.string,
       title: PropTypes.string,
-      content: PropTypes.string,
-      publicationDate: PropTypes.string,
-      updateDate: PropTypes.string,
-      email: PropTypes.string,
-      status: PropTypes.string,
-      image: PropTypes.string,
-      price: PropTypes.string,
+      photo: PropTypes.string,
+      author: PropTypes.string,
+      created: PropTypes.string,
       phone: PropTypes.string,
-      location: PropTypes.string,
     })
   ),
 };
